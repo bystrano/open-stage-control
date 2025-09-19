@@ -4,6 +4,7 @@ var UiModal = require('./ui-modal'),
     raw = require('nanohtml/raw'),
     {icon} = require('../ui/utils'),
     ace = require('ace-builds/src/ace.js'),
+    vimKeyBinding = require('ace-builds/src/keybinding-vim.js'),
     scriptGlobals = require('../widgets/scripts/script-vm').globals,
     editors = {}, editorModes = {
         javascript: require('ace-builds/src/mode-javascript.js'),
@@ -93,6 +94,7 @@ class CodeEditor {
         this.editor.textarea._ace = true
         this.editor.setHighlightActiveLine(false)
         this.editor.setHighlightGutterLine(false)
+        this.editor.setKeyboardHandler('ace/keyboard/vim')
 
         if (language === 'javascript' && syntaxChecker !== false) {
             this.editor.getSession().$worker.send('setOptions', [{
